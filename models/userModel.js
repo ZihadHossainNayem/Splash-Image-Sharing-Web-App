@@ -13,6 +13,12 @@ const userSchema = new Schema(
     },
     avatar: String,
     public_id: String,
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+    ],
     followings: [
       {
         type: Schema.Types.ObjectId,

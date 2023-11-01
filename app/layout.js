@@ -3,6 +3,8 @@ import "./globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import connectDB from "@/utils/database";
+import AuthProvider from "@/provider/AuthProvider";
+import Nav from "@/components/UI/NavBar/Nav";
 
 connectDB();
 
@@ -20,8 +22,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={raleway.className}>
-        <main>{children}</main>
-        <ToastContainer position="bottom-right" />
+        <AuthProvider>
+          <Nav />
+          <main>{children}</main>
+          <ToastContainer position="bottom-right" />
+        </AuthProvider>
       </body>
     </html>
   );
