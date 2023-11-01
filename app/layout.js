@@ -1,5 +1,10 @@
 import { Raleway } from "next/font/google";
 import "./globals.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import connectDB from "@/utils/database";
+
+connectDB();
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -14,7 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={raleway.className}>{children}</body>
+      <body className={raleway.className}>
+        <main>{children}</main>
+        <ToastContainer position="bottom-right" />
+      </body>
     </html>
   );
 }
