@@ -1,7 +1,16 @@
 export const validFiles = (file) => {
   const imgTypes = ["image/jpeg", "image/png"];
 
-  /* 2 criteria - only jpeg and png, and less than 1mb file size */
+  /* 3 criteria - is it image?  is it jpeg and png? and is it less than 1mb? */
+
+  if (!file.type.startsWith("image")) {
+    return {
+      status: "error",
+      errorMessage: `This is not an image - ${file.types}`,
+      title: file.name,
+      imgUrl: "/placeholderImage1.jpg",
+    };
+  }
 
   if (!imgTypes.includes(file.type)) {
     return {
@@ -15,7 +24,7 @@ export const validFiles = (file) => {
   if (file.size > 1024 * 1024) {
     return {
       status: "error",
-      errorMessage: `Image size is large than 1MB`,
+      errorMessage: `Image size is larger than 1MB`,
       title: file.name,
       imgUrl: URL.createObjectURL(file),
     };

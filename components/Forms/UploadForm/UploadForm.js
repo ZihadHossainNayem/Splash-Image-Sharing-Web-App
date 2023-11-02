@@ -49,9 +49,13 @@ const UploadForm = React.memo(({ setFiles }) => {
           height={40}
           sizes="25vw"
           className="w-32 h-24"
+          priority
         />
         <p className="mx-3 md:text-lg font-medium">
-          Drag &amp; drop up to 5 images or <span>browse</span> to choose files
+          <span className="font-semibold text-blue-500">Drag &amp; drop</span>{" "}
+          up to 5 images or{" "}
+          <span className="font-semibold text-blue-500">browse</span> to choose
+          files
         </p>
         <p className="text-sm text-gray-500">
           jpeg, &amp; png files only - Max 1MB

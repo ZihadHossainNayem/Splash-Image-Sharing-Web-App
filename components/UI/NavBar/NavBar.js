@@ -30,7 +30,7 @@ const NavBar = ({ user }) => {
         </div>
 
         {/* navbar menu */}
-        <div className="flex h-full items-center gap-2">
+        <div className="flex h-full items-center md:gap-4 gap-3">
           {!user ? (
             <>
               {/* login button */}
