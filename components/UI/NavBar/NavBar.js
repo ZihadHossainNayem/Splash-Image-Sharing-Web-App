@@ -25,7 +25,7 @@ const NavBar = ({ user }) => {
         </Link>
 
         {/* search */}
-        <div className="flex-1 h-full min-w-[100px] max-w-2xl bg-gray-50 rounded-3xl overflow-hidden">
+        <div className="flex-1 h-full min-w-[100px] max-w-2xl bg-gray-100 rounded-3xl overflow-hidden">
           <SearchForm />
         </div>
 
@@ -39,24 +39,24 @@ const NavBar = ({ user }) => {
                 className="flex justify-center items-center gap-2 rounded px-[10px] py-2 border hover:border-black  whitespace-nowrap shadow-sm"
               >
                 <BiUser className="block md:hidden text-xl" />
-                <span className="md:block hidden">Log in</span>
+                <span className="md:block hidden text-sm">Log in</span>
               </button>
               {/* image upload button */}
               <button
                 onClick={() => signIn("google", { callbackUrl: "/upload" })}
                 className="flex justify-center items-center gap-2 rounded px-[10px] py-2 border hover:border-black whitespace-nowrap shadow-sm"
               >
-                <BiUpload className="block md:hidden text-xl" />
-                <span className="md:block hidden">Upload Image</span>
+                <BiUpload className="block text-xl" />
+                <span className="md:block hidden text-sm">Upload Image</span>
               </button>
             </>
           ) : (
             <>
               {/* image upload button */}
               <button className="flex justify-center items-center gap-2 rounded px-[10px] py-2 border hover:border-black whitespace-nowrap shadow-sm">
-                <Link href="/upload">
-                  <BiUpload className="block md:hidden text-xl" />
-                  <span className="md:block hidden">Upload Image</span>
+                <Link href="/upload" className="flex items-center gap-2">
+                  <BiUpload className="block text-xl" />
+                  <span className="md:block hidden text-sm">Upload Image</span>
                 </Link>
               </button>
               {/* profile avatar */}

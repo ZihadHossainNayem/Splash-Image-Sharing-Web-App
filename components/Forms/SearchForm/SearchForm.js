@@ -22,7 +22,7 @@ const SearchForm = () => {
       <input
         type="search"
         name="search"
-        className="h-full pr-4 outline-none border-none min-w-0 bg-transparent flex-1"
+        className="h-full pr-4 outline-none border-none min-w-0 bg-transparent flex-1 placeholder:text-sm"
         placeholder="Search here..."
         autoComplete="off"
         required
