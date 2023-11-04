@@ -49,7 +49,6 @@ const UploadForm = React.memo(({ setFiles }) => {
           height={40}
           sizes="25vw"
           className="w-32 h-24"
-          priority
         />
         <p className="mx-3 md:text-lg font-medium">
           <span className="font-semibold text-blue-500">Drag &amp; drop</span>{" "}

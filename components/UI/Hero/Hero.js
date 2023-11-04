@@ -13,6 +13,7 @@ const Hero = () => {
         placeholder="blur"
         priority
         className="object-cover"
+        sizes="(max-width:50px) 2vw"
       />
       {/* hero text container */}
       <div className="w-full h-full absolute top-0 left-0 bg-black bg-opacity-30 flex items-center justify-center">

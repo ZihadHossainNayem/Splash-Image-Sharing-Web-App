@@ -97,6 +97,7 @@ const UploadCard = React.memo(({ file, setFiles, index }) => {
         width={280}
         height={280}
         title={file?.title}
+        className="w-auto h-auto"
       />
       {file?.errorMessage ? (
         // if error
