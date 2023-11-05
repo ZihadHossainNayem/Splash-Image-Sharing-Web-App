@@ -20,7 +20,6 @@ const UploadForm = React.memo(({ setFiles }) => {
     e.preventDefault();
     const data = e.dataTransfer;
     handleInputFiles(data.files);
-    console.log(data);
   };
 
   return (

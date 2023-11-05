@@ -7,6 +7,7 @@ const imageSchema = new Schema(
     public_id: String,
     imgUrl: String,
     imgName: String,
+    blurHash: String,
     tags: [],
     /* image is public or private */
     public: {
@@ -14,7 +15,7 @@ const imageSchema = new Schema(
       default: false,
     },
     /* single reference relationship */
-    users: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "users",
     },

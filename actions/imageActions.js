@@ -3,6 +3,8 @@
 import ImageModel from "@/models/imageModel";
 import { imageUploadToCloudinary } from "@/utils/cloudinary";
 import { dynamicBlurDataUrl } from "@/utils/dynamicBlurDataUrlGenerator";
+import { generateImagesMatch } from "@/utils/generateImagesMatch";
+import { generateImagesPipeline } from "@/utils/generateImagesPipeline";
 import getServerUser from "@/utils/getServerUser";
 import { slugify } from "@/utils/slugify";
 import { revalidatePath } from "next/cache";
@@ -42,6 +44,21 @@ export async function uploadImages(formData, filesUpload) {
     /* revalidate the home page to reflect the changes */
     revalidatePath("/");
     return { message: "Upload Successfully!" };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+export async function getImages(query) {
+  try {
+    const match = generateImagesMatch(query);
+
+    const pipeline = await generateImagesPipeline({ match });
+
+    const images = JSON.parse(
+      JSON.stringify(await ImageModel.aggregate(pipeline))
+    );
+    return { data: images };
   } catch (error) {
     return { errorMessage: error.message };
   }

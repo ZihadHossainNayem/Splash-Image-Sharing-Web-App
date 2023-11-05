@@ -20,7 +20,6 @@ export const authOptions = {
   callbacks: {
     /* when sign in, receives profile information as parameter  */
     async signIn({ profile }) {
-      console.log(profile);
       return await signInWithOAuth({ profile });
     },
     /* jwt called whenever json web token is created or updated

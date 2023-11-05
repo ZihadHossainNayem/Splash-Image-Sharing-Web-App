@@ -1,11 +1,19 @@
+import { getImages } from "@/actions/imageActions";
 import Hero from "@/components/UI/Hero/Hero";
 import React from "react";
 
-const Home = () => {
+const Home = async () => {
+  const response = await getImages({ page: "home" });
+  console.log(response);
   return (
-    <div>
+    <>
       <Hero />
-    </div>
+      {response?.errorMessage ? (
+        <Error errorMessage={response.errorMessage} />
+      ) : (
+        "Gallery"
+      )}
+    </>
   );
 };
 

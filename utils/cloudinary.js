@@ -48,5 +48,4 @@ export async function imageUploadToCloudinary(files, userId) {
   /* remove images from temp folder after uploading to cloudinary */
   newFiles.map((file) => fs.unlink(file.filepath));
   return results;
-  console.log(newFiles);
 }
