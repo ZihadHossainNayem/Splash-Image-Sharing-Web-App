@@ -4,6 +4,7 @@ import UploadCard from "@/components/Cards/UploadCard/UploadCard";
 import UploadForm from "@/components/Forms/UploadForm/UploadForm";
 import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../Loading/Loading";
 
 const Upload = () => {
   const [files, setFiles] = useState([]);
@@ -41,6 +42,9 @@ const Upload = () => {
     setLoading(false);
 
     if (response?.errorMessage) toast.error(response.errorMessage);
+    /* clears memory */
+    files.map((file) => URL.revokeObjectURL(file.imgUrl));
+    setFiles([]);
   };
 
   return (
@@ -75,6 +79,7 @@ const Upload = () => {
           ? `Upload ${count} image`
           : `Upload to Splash`}
       </button>
+      {loading ? <Loading /> : null}
     </div>
   );
 };

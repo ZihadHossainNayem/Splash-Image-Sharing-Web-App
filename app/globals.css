@@ -10,3 +10,16 @@
 span {
   font-weight: 500;
 }
+
+.dash {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 1;
+  animation: dash 3s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite
+    alternate-reverse;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 220;
+  }
+}
