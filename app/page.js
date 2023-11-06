@@ -1,5 +1,6 @@
 import { getImages } from "@/actions/imageActions";
 import Hero from "@/components/UI/Hero/Hero";
+import ImageGallery from "@/components/UI/ImageGallery/ImageGallery";
 import React from "react";
 
 const Home = async () => {
@@ -11,7 +12,7 @@ const Home = async () => {
       {response?.errorMessage ? (
         <Error errorMessage={response.errorMessage} />
       ) : (
-        "Gallery"
+        <ImageGallery data={response?.data} />
       )}
     </>
   );
