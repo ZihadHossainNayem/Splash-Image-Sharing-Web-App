@@ -4,6 +4,7 @@ import React from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiDownload } from "react-icons/bi";
+import { handleDownloadImage } from "@/utils/downloadImage";
 
 const ImageCard = React.memo(({ image, setImages, index }) => {
   console.log(image);
@@ -20,7 +21,7 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
         sizes="60vw"
         placeholder="blur"
         blurDataURL={image?.blurHash}
-        className="object-cover w-auto h-auto"
+        className="object-cover w-full h-auto"
       />
       {/* top section */}
       <div
@@ -30,17 +31,17 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
         {image?.myUserId === image?.user?._id ? (
           <>
             {/* delete button */}
-            <button className="bg-white p-1 rounded">
+            <button className="bg-white bg-opacity-80 p-1 rounded">
               <AiOutlineDelete size={22} />
             </button>
             {/* edit button */}
-            <button className="bg-white p-1 rounded">
+            <button className="bg-white bg-opacity-80  p-1 rounded">
               <AiOutlineEdit size={22} />
             </button>
           </>
         ) : null}
 
-        <button className="bg-white p-1 rounded ">
+        <button className="bg-white bg-opacity-80  p-1 rounded ">
           {image?.isFavorite ? (
             <MdOutlineFavorite size={22} />
           ) : (
@@ -69,10 +70,15 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
               className="rounded-full"
             />
           </div>
-          <span className="line-clamp-1">{image?.user?.name}</span>
+          <span className="line-clamp-1 font-medium text-white">
+            {image?.user?.name}
+          </span>
         </Link>
         {/* download button */}
-        <button className="bg-white p-1 rounded">
+        <button
+          onClick={() => handleDownloadImage(image)}
+          className="bg-white bg-opacity-80  p-1 rounded"
+        >
           <BiDownload size={22} />
         </button>
       </div>
