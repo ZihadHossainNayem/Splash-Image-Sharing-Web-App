@@ -33,7 +33,7 @@ export async function uploadImages(formData, filesUpload) {
       title: filesUpload[index].title,
       tags: filesUpload[index].tags,
       slug: slugify(filesUpload[index].title),
-      imgName: `${slugify(filesUpload[index].title)}${image.format}`,
+      imgName: `${slugify(filesUpload[index].title)}.${image.format}`,
       public: filesUpload[index].public,
       blurHash: blurData[index],
     }));

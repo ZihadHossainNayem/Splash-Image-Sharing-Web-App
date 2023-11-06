@@ -1,6 +1,8 @@
 export async function handleDownloadImage(image) {
   fetch(image?.imgUrl)
+    /* convert into blob object for raw data */
     .then((response) => response.blob())
+    /* blob object converted into url, for download */
     .then((blob) => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
