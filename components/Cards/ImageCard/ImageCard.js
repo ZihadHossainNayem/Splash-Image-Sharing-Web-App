@@ -7,7 +7,6 @@ import { BiDownload } from "react-icons/bi";
 import { handleDownloadImage } from "@/utils/downloadImage";
 
 const ImageCard = React.memo(({ image, setImages, index }) => {
-  console.log(image);
   return (
     <div
       className="w-full min-h-[120px] mb-4 shadow overflow-hidden 

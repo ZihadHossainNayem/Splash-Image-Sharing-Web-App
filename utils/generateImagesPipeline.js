@@ -3,12 +3,21 @@
 import getServerUser from "./getServerUser";
 import { Types } from "mongoose";
 
-export async function generateImagesPipeline({ match }) {
+export async function generateImagesPipeline({ match, sort, limit }) {
   const user = await getServerUser();
   const userId = user ? new Types.ObjectId(user?._id) : undefined;
 
   const base_pipeline = [
-    { $match: match },
+    {
+      $sort:
+        sort === "_id"
+          ? { _id: -1 }
+          : { updatedAt: -1 } /* sort before match */,
+    },
+    { $match: match } /* finding match */,
+    {
+      $limit: limit /* limit after match */,
+    },
     {
       $lookup: {
         from: "users",

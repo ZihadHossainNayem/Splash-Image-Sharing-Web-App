@@ -12,7 +12,12 @@ const Home = async () => {
       {response?.errorMessage ? (
         <Error errorMessage={response.errorMessage} />
       ) : (
-        <ImageGallery data={response?.data} />
+        <ImageGallery
+          data={response?.data}
+          next_cursor={response?.next_cursor}
+          fetchingData={getImages}
+          query={{ page: "home" }}
+        />
       )}
     </>
   );
