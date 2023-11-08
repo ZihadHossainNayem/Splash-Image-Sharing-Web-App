@@ -10,6 +10,7 @@ import { nextCursor } from "@/utils/nextCursor";
 import { slugify } from "@/utils/slugify";
 import { revalidatePath } from "next/cache";
 
+/* function for uploadImage action */
 export async function uploadImages(formData, filesUpload) {
   try {
     /* get authenticated user from the server */
@@ -50,6 +51,8 @@ export async function uploadImages(formData, filesUpload) {
   }
 }
 
+/* function for getting image action */
+
 export async function getImages(query) {
   try {
     /* extract sort and limit parameter from query */
@@ -68,6 +71,28 @@ export async function getImages(query) {
     const next_cursor = nextCursor({ data: images, sort, limit });
 
     return { data: images, next_cursor };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* function for favorite image status in mongoDB*/
+
+export async function favoriteImage({ myUserId, _id, isFavorite }) {
+  try {
+    if (isFavorite) {
+      /* if favorite, remove the user id from the favorite_users array */
+      await ImageModel.findByIdAndUpdate(_id, {
+        $pull: { favorite_users: myUserId },
+      });
+    } else {
+      /* If it's not a favorite, add the user id to the favorite_users array */
+      await ImageModel.findByIdAndUpdate(_id, {
+        $push: { favorite_users: myUserId },
+      });
+    }
+    revalidatePath("/");
+    return { message: "Favorite success.." };
   } catch (error) {
     return { errorMessage: error.message };
   }

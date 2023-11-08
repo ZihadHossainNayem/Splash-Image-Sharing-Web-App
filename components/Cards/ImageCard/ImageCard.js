@@ -5,8 +5,25 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiDownload } from "react-icons/bi";
 import { handleDownloadImage } from "@/utils/downloadImage";
+import { favoriteImage } from "@/actions/imageActions";
+import { toast } from "react-toastify";
 
 const ImageCard = React.memo(({ image, setImages, index }) => {
+  /* favorite image button handle */
+  async function handleFavoriteImage() {
+    /* authenticated user check or return to sign in page*/
+    if (!image?.myUserId) return signIn("google");
+
+    /* clone the current image and toggle favorite */
+    const newImage = { ...image, isFavorite: !image?.isFavorite };
+    setImages((images) =>
+      images.map((item) => (item._id === newImage?._id ? newImage : item))
+    );
+    const response = await favoriteImage(image);
+
+    if (response?.errorMessage) toast.error(response.errorMessage);
+  }
+
   return (
     <div
       className="w-full min-h-[120px] mb-4 shadow overflow-hidden 
@@ -39,10 +56,13 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
             </button>
           </>
         ) : null}
-
-        <button className="bg-white bg-opacity-80  p-1 rounded ">
+        {/*  favorite image button */}
+        <button
+          onClick={handleFavoriteImage}
+          className="bg-white bg-opacity-80  p-1 rounded "
+        >
           {image?.isFavorite ? (
-            <MdOutlineFavorite size={22} />
+            <MdOutlineFavorite className="text-red-500" size={22} />
           ) : (
             <MdOutlineFavoriteBorder size={22} />
           )}
