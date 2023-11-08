@@ -1,4 +1,4 @@
-import { Raleway } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,7 +8,7 @@ import Nav from "@/components/UI/NavBar/Nav";
 
 connectDB();
 
-const raleway = Raleway({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
 });
@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={raleway.className}>
+      <body className={poppins.className}>
         <AuthProvider>
           <Nav />
           <main>{children}</main>
