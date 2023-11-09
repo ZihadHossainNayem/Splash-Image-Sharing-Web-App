@@ -4,17 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineSetting, AiOutlineLogout } from "react-icons/ai";
+import Modal from "../../Modal/Modal";
+import ProfileEdit from "../Edit/ProfileEdit";
 
 const Info = ({ user }) => {
   const [isFollowing, setIsFollowing] = useState(user?.isFollowing);
   const [totalFollower, setTotalFollower] = useState(user?.total_followers);
 
+  const [isEdit, setIsEdit] = useState(false);
+
   return (
     <div className="w-[95%] m-auto mx-10 my-10 max-w-[1600px]">
       {/* profile information  */}
-      <div className="flex items-center gap-8">
+      <div className="flex items-center md:gap-8 gap-4">
         {/* avatar */}
-        <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center">
+        <div className="md:w-32 md:h-32 h-28 w-28 rounded-full overflow-hidden flex items-center justify-center">
           <Image
             src={user?.avatar}
             alt={user?.name}
@@ -27,10 +31,16 @@ const Info = ({ user }) => {
 
         <div className="flex-1 max-w-[480px]">
           {/* name email */}
-          <h1 className="text-3xl font-semibold" title={user?.name}>
+          <h1
+            className="md:text-3xl text-xl line-clamp-1 font-semibold"
+            title={user?.name}
+          >
             {user?.name}
           </h1>
-          <h2 className="text-gray-500 mb-3" title={user?.email}>
+          <h2
+            className="text-gray-500 mb-3 md:text-base text-sm"
+            title={user?.email}
+          >
             {user?.email}
           </h2>
           {/* buttons */}
@@ -38,7 +48,10 @@ const Info = ({ user }) => {
             {user?.my_user ? (
               <>
                 {/* edit button */}
-                <button className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow">
+                <button
+                  onClick={() => setIsEdit(true)}
+                  className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow"
+                >
                   <AiOutlineSetting />
                   <span>Edit</span>
                 </button>
@@ -76,6 +89,11 @@ const Info = ({ user }) => {
           <span className="text-gray-600">Follower</span>
         </Link>
       </div>
+      {isEdit !== false && user?.my_user ? (
+        <Modal open={setIsEdit}>
+          <ProfileEdit user={user} setIsEdit={setIsEdit} />
+        </Modal>
+      ) : null}
     </div>
   );
 };

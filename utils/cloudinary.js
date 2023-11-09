@@ -49,3 +49,8 @@ export async function imageUploadToCloudinary(files, userId) {
   newFiles.map((file) => fs.unlink(file.filepath));
   return results;
 }
+
+/* delete from cloudinary */
+export async function deleteFromCloudinary(public_id) {
+  if (public_id) return await cloudinary.v2.uploader.destroy(public_id);
+}

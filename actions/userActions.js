@@ -1,6 +1,11 @@
 "use server";
 
 import UserModel from "@/models/userModel";
+import {
+  deleteFromCloudinary,
+  imageUploadToCloudinary,
+} from "@/utils/cloudinary";
+import { revalidatePath } from "next/cache";
 
 export async function getUserById({ myUser, id }) {
   try {
@@ -23,6 +28,37 @@ export async function getUserById({ myUser, id }) {
     };
 
     return { user: newUser };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* profile information update */
+
+export async function updateUser({ formData, name, user }) {
+  try {
+    const files = formData.getAll("files");
+
+    if (!files.length) {
+      /* only name change here...*/
+      await UserModel.findByIdAndUpdate(user?._id, { name });
+    } else {
+      /* avatar change here... */
+      const [response] = await imageUploadToCloudinary(files, user?._id);
+      /* upload to cloudinary -> change it in mongodb -> delete old avatar on cloudinary */
+      await Promise.all([
+        UserModel.findByIdAndUpdate(user?._id, {
+          name,
+          avatar: response?.secure_url,
+          public_id: response?.public_id,
+        }),
+        deleteFromCloudinary(user?.public_id),
+      ]);
+    }
+    console.log({ files, name, user });
+
+    revalidatePath("/");
+    return { message: "Update success..." };
   } catch (error) {
     return { errorMessage: error.message };
   }
