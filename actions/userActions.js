@@ -63,3 +63,39 @@ export async function updateUser({ formData, name, user }) {
     return { errorMessage: error.message };
   }
 }
+
+/* function for follow user */
+
+export async function followUser({ myUserId, _id, isFollowing }) {
+  try {
+    if (isFollowing) {
+      /* unfollow the otherUser */
+      await Promise.all([
+        /* remove otherUser's from myUser's followings*/
+        UserModel.findByIdAndUpdate(myUserId, {
+          $pull: { followings: _id },
+        }),
+        /* remove myUser from otherUser's followers */
+        UserModel.findByIdAndUpdate(_id, {
+          $pull: { followers: myUserId },
+        }),
+      ]);
+    } else {
+      /* follow the otherUser */
+      await Promise.all([
+        /* add otherUser's to myUser's followings */
+        UserModel.findByIdAndUpdate(myUserId, {
+          $push: { followings: _id },
+        }),
+        /* add myUser to otherUser's followers */
+        UserModel.findByIdAndUpdate(_id, {
+          $push: { followers: myUserId },
+        }),
+      ]);
+    }
+    revalidatePath("/");
+    return { message: "Follow success..." };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}

@@ -11,13 +11,28 @@ import {
 import { MdDone } from "react-icons/md";
 import Modal from "../../Modal/Modal";
 import ProfileEdit from "../Edit/ProfileEdit";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { followUser } from "@/actions/userActions";
+import { toast } from "react-toastify";
 
 const Info = ({ user }) => {
   const [isFollowing, setIsFollowing] = useState(user?.isFollowing);
-  const [totalFollower, setTotalFollower] = useState(user?.total_followers);
-
+  const [totalFollowers, setTotalFollowers] = useState(user?.total_followers);
   const [isEdit, setIsEdit] = useState(false);
+
+  /* function for handling follow */
+  const handleFollow = async () => {
+    /* send to sign in page if not a user */
+    if (!user?.myUserId) return signIn("google");
+
+    /* toggle state of isFollowing */
+    setIsFollowing((prev) => !prev);
+    /* update the total followers count */
+    setTotalFollowers((prev) => (isFollowing ? prev - 1 : prev + 1));
+
+    const response = await followUser({ ...user, isFollowing });
+    if (response?.errorMessage) toast.error(response.errorMessage);
+  };
 
   return (
     <div className="w-[95%] m-auto mx-10 my-10 max-w-[1600px]">
@@ -71,7 +86,10 @@ const Info = ({ user }) => {
                 </button>
               </>
             ) : (
-              <button className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow">
+              <button
+                onClick={handleFollow}
+                className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow"
+              >
                 {isFollowing ? <MdDone /> : <AiOutlinePlus />}
                 <span>{isFollowing ? "Following" : "Follow"}</span>
               </button>
@@ -94,7 +112,7 @@ const Info = ({ user }) => {
           href={`/profile/${user?._id}/following`}
           className="flex gap-1 items-center hover:underline"
         >
-          <span>{formatNumber(user?.total_followers)}</span>
+          <span>{formatNumber(totalFollowers)}</span>
           <span className="text-gray-600">Follower</span>
         </Link>
       </div>

@@ -86,7 +86,7 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
               width={40}
               height={40}
               sizes="25vw"
-              className="rounded-full"
+              className="rounded-full w-10 h-10"
             />
           </div>
           <span className="line-clamp-1 font-medium text-white">
