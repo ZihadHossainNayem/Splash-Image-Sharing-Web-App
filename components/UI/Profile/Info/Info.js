@@ -3,9 +3,15 @@ import formatNumber from "@/utils/formatNumber";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { AiOutlineSetting, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiOutlineSetting,
+  AiOutlineLogout,
+  AiOutlinePlus,
+} from "react-icons/ai";
+import { MdDone } from "react-icons/md";
 import Modal from "../../Modal/Modal";
 import ProfileEdit from "../Edit/ProfileEdit";
+import { signOut } from "next-auth/react";
 
 const Info = ({ user }) => {
   const [isFollowing, setIsFollowing] = useState(user?.isFollowing);
@@ -56,14 +62,17 @@ const Info = ({ user }) => {
                   <span>Edit</span>
                 </button>
                 {/* logout button */}
-                <button className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow">
+                <button
+                  onClick={signOut}
+                  className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow"
+                >
                   <AiOutlineLogout />
                   <span>Logout</span>
                 </button>
               </>
             ) : (
               <button className="px-2 py-1 flex items-center gap-1 border border-gray-300 hover:border-black rounded shadow">
-                {isFollowing ? "done" : "add"}
+                {isFollowing ? <MdDone /> : <AiOutlinePlus />}
                 <span>{isFollowing ? "Following" : "Follow"}</span>
               </button>
             )}

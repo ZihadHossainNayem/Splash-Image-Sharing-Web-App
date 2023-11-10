@@ -23,7 +23,7 @@ export async function getUserById({ myUser, id }) {
       total_followings: user?.followings.length,
       followers: [],
       followings: [],
-      isFollowing: user?.followers.include(myUser?._id),
+      isFollowing: user?.followers.includes(myUser?._id),
       myUserId: myUser?._id,
     };
 

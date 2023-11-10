@@ -9,7 +9,7 @@ const ProfileInfo = async ({ myUser, id }) => {
   return (
     <>
       {response?.errorMessage ? (
-        <Error errorMessage={errorMessage} />
+        <Error errorMessage={response.errorMessage} />
       ) : (
         <Info user={response?.user} />
       )}
