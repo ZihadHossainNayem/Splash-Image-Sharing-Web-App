@@ -19,7 +19,7 @@ const Modal = ({ children, open, url }) => {
   }
 
   return (
-    <div className="w-full h-[100vh] backdrop-blur-sm fixed top-0 left-0 z-[99] flex justify-center items-center">
+    <div className="w-full h-[100vh] backdrop-blur-sm fixed top-0 left-0 z-[999] flex justify-center items-center">
       <div
         onClick={handleClose}
         className="w-full h-[100vh] absolute top-0 left-0 z-[99]"

@@ -7,10 +7,6 @@
   margin: 0;
 }
 
-span {
-  font-weight: 500;
-}
-
 .dash {
   stroke-dasharray: 22;
   stroke-dashoffset: 1;

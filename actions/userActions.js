@@ -5,6 +5,9 @@ import {
   deleteFromCloudinary,
   imageUploadToCloudinary,
 } from "@/utils/cloudinary";
+import { generateUsersMatch } from "@/utils/generateUsersMatch";
+import { generateUsersPipeline } from "@/utils/generateUsersPipeline";
+import { nextCursor } from "@/utils/nextCursor";
 import { revalidatePath } from "next/cache";
 
 export async function getUserById({ myUser, id }) {
@@ -95,6 +98,31 @@ export async function followUser({ myUserId, _id, isFollowing }) {
     }
     revalidatePath("/");
     return { message: "Follow success..." };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* function for follow user */
+
+export async function getUsers(query) {
+  try {
+    /* extract sort and limit parameter from query */
+    const sort = query?.sort || "_id";
+    const limit = query?.limit * 1 || 15;
+
+    const match = generateUsersMatch(query);
+
+    const pipeline = await generateUsersPipeline({ match, limit, sort });
+
+    const users = JSON.parse(
+      JSON.stringify(await UserModel.aggregate(pipeline))
+    );
+
+    // calculate the next cursor for pagination based on retrieved image, sort ,limit
+    const next_cursor = nextCursor({ data: users, sort, limit });
+
+    return { data: users, next_cursor };
   } catch (error) {
     return { errorMessage: error.message };
   }

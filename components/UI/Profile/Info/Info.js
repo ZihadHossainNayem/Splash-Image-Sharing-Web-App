@@ -109,7 +109,7 @@ const Info = ({ user }) => {
 
         {/* follower section */}
         <Link
-          href={`/profile/${user?._id}/following`}
+          href={`/profile/${user?._id}/follower`}
           className="flex gap-1 items-center hover:underline"
         >
           <span>{formatNumber(totalFollowers)}</span>
