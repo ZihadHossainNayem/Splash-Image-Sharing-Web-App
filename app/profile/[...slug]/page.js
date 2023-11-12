@@ -1,5 +1,6 @@
 import ProfileFollow from "@/components/UI/Profile/Follow/Follow";
 import ProfileInfo from "@/components/UI/Profile/Info";
+import ProfileMenu from "@/components/UI/Profile/Menu/Menu";
 import getServerUser from "@/utils/getServerUser";
 import React from "react";
 
@@ -15,6 +16,7 @@ const ProfilePage = async ({ params: { slug } }) => {
     <>
       <ProfileInfo myUser={myUser} id={id} />
       <ProfileFollow id={id} page={page} />
+      <ProfileMenu id={id} page={page} myUser={myUser?._id} />
     </>
   );
 };

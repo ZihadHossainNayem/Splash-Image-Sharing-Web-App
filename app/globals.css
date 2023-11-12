@@ -7,6 +7,21 @@
   margin: 0;
 }
 
+li {
+  list-style: none;
+  color: rgb(116, 116, 116);
+  padding: 16px 0;
+  cursor: pointer;
+}
+
+li:hover {
+  color: black;
+}
+
+li.active {
+  border-bottom: 2px solid black;
+}
+
 .dash {
   stroke-dasharray: 22;
   stroke-dashoffset: 1;

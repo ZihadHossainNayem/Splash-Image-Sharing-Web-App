@@ -35,7 +35,7 @@ const Info = ({ user }) => {
   };
 
   return (
-    <div className="w-[95%] m-auto mx-10 my-10 max-w-[1600px]">
+    <div className="w-[95%] m-auto my-10 max-w-[1600px]">
       {/* profile information  */}
       <div className="flex items-center md:gap-8 gap-4">
         {/* avatar */}
