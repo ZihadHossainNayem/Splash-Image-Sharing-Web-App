@@ -4,7 +4,10 @@ import ImageModel from "@/models/imageModel";
 import { imageUploadToCloudinary } from "@/utils/cloudinary";
 import { dynamicBlurDataUrl } from "@/utils/dynamicBlurDataUrlGenerator";
 import { generateImagesMatch } from "@/utils/generateImagesMatch";
-import { generateImagesPipeline } from "@/utils/generateImagesPipeline";
+import {
+  generateImagesCountPipeline,
+  generateImagesPipeline,
+} from "@/utils/generateImagesPipeline";
 import getServerUser from "@/utils/getServerUser";
 import { nextCursor } from "@/utils/nextCursor";
 import { slugify } from "@/utils/slugify";
@@ -93,6 +96,25 @@ export async function favoriteImage({ myUserId, _id, isFavorite }) {
     }
     revalidatePath("/");
     return { message: "Favorite success.." };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* function for image count */
+
+export async function getImagesCount(query) {
+  try {
+    const match = generateImagesMatch(query);
+
+    const pipeline = await generateImagesCountPipeline({ match });
+    console.log(pipeline);
+    const [result] = JSON.parse(
+      JSON.stringify(await ImageModel.aggregate(pipeline))
+    );
+    console.log(result);
+
+    return result?.total || 0;
   } catch (error) {
     return { errorMessage: error.message };
   }

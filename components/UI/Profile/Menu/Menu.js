@@ -1,3 +1,4 @@
+import { getImagesCount } from "@/actions/imageActions";
 import formatNumber from "@/utils/formatNumber";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +9,14 @@ import { MdOutlineFavorite } from "react-icons/md";
 const ProfileMenu = async ({ id, page, myUserId }) => {
   const pages = ["public", "private", "favorite"];
   if (!pages.includes(page)) return null;
+
+  /* public , private, favorite image count for profile menu */
+  const [public_count, private_count, favorite_count] = await Promise.all([
+    getImagesCount({ id, page: "public" }),
+    getImagesCount({ id, page: "private" }),
+    getImagesCount({ id, page: "favorite" }),
+  ]);
+
   return (
     <div className="w-full border-b bg-white sticky top-16 left-0 z-[10]">
       {/* container */}
@@ -23,7 +32,7 @@ const ProfileMenu = async ({ id, page, myUserId }) => {
               <span>
                 Public <span className="hidden md:inline-block">Images</span>
               </span>
-              {formatNumber(43444)}
+              {formatNumber(public_count)}
             </div>
           </Link>
         </li>
@@ -39,7 +48,7 @@ const ProfileMenu = async ({ id, page, myUserId }) => {
               <span>
                 Private <span className="hidden md:inline-block">Images</span>
               </span>
-              {formatNumber(43444)}
+              {formatNumber(private_count)}
             </div>
           </Link>
         </li>
@@ -55,7 +64,7 @@ const ProfileMenu = async ({ id, page, myUserId }) => {
               <span>
                 Favorite <span className="hidden md:inline-block">Images</span>
               </span>
-              {formatNumber(43444)}
+              {formatNumber(favorite_count)}
             </div>
           </Link>
         </li>

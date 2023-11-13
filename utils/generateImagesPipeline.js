@@ -49,3 +49,16 @@ export async function generateImagesPipeline({ match, sort, limit }) {
 
   return base_pipeline;
 }
+
+/* for public, private, favorite image count for profile menu*/
+
+export async function generateImagesCountPipeline({ match }) {
+  const base_pipeline = [
+    { $match: match } /* finding match */,
+    {
+      $count: "total",
+    },
+  ];
+
+  return base_pipeline;
+}
