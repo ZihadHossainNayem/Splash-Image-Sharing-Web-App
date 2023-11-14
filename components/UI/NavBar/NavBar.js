@@ -8,7 +8,7 @@ import SearchForm from "@/components/Forms/SearchForm/SearchForm";
 
 const NavBar = ({ user }) => {
   return (
-    <nav className="w-[100%] bg-white p-4 sticky top-0 left-0 z-[100]">
+    <nav className="w-[100%] bg-white p-4">
       <div className="w-[95%] max-w-[1600px] mx-auto h-10 flex justify-between items-center md:gap-8 gap-3">
         {/* logo */}
         <Link

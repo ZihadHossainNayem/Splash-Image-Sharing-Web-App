@@ -7,6 +7,8 @@ import { BsImages } from "react-icons/bs";
 import { MdOutlineFavorite } from "react-icons/md";
 
 const ProfileMenu = async ({ id, page, myUserId }) => {
+  if (id !== myUserId) return null;
+
   const pages = ["public", "private", "favorite"];
   if (!pages.includes(page)) return null;
 

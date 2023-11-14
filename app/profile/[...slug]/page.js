@@ -1,4 +1,5 @@
 import ProfileFollow from "@/components/UI/Profile/Follow/Follow";
+import ProfileGallery from "@/components/UI/Profile/Gallery/Gallery";
 import ProfileInfo from "@/components/UI/Profile/Info";
 import ProfileMenu from "@/components/UI/Profile/Menu/Menu";
 import getServerUser from "@/utils/getServerUser";
@@ -16,7 +17,8 @@ const ProfilePage = async ({ params: { slug } }) => {
     <>
       <ProfileInfo myUser={myUser} id={id} />
       <ProfileFollow id={id} page={page} />
-      <ProfileMenu id={id} page={page} myUser={myUser?._id} />
+      <ProfileMenu id={id} page={page} myUserId={myUser?._id} />
+      <ProfileGallery id={id} page={page} myUserId={myUser?._id} />
     </>
   );
 };
