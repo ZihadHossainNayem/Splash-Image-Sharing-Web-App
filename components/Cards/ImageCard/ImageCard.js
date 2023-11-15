@@ -1,14 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiDownload } from "react-icons/bi";
 import { handleDownloadImage } from "@/utils/downloadImage";
 import { favoriteImage } from "@/actions/imageActions";
 import { toast } from "react-toastify";
+import UploadCard from "../UploadCard/UploadCard";
 
 const ImageCard = React.memo(({ image, setImages, index }) => {
+  const [isEdit, setIsEdit] = useState(false);
+
   /* favorite image button handle */
   async function handleFavoriteImage() {
     /* authenticated user check or return to sign in page*/
@@ -23,6 +26,17 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
 
     if (response?.errorMessage) toast.error(response.errorMessage);
   }
+
+  /* for edit image */
+  if (isEdit)
+    return (
+      <UploadCard
+        file={image}
+        setFiles={setImages}
+        index={index}
+        setIsEdit={setIsEdit}
+      />
+    );
 
   return (
     <div
@@ -51,7 +65,10 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
               <AiOutlineDelete size={22} />
             </button>
             {/* edit button */}
-            <button className="bg-white bg-opacity-80  p-1 rounded">
+            <button
+              onClick={() => setIsEdit(true)}
+              className="bg-white bg-opacity-80  p-1 rounded"
+            >
               <AiOutlineEdit size={22} />
             </button>
           </>

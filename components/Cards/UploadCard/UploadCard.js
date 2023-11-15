@@ -1,10 +1,14 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { BsX } from "react-icons/bs";
 import { BiSolidLockAlt } from "react-icons/bi";
+import { updateImage } from "@/actions/imageActions";
+import { toast } from "react-toastify";
 
-const UploadCard = React.memo(({ file, setFiles, index }) => {
+const UploadCard = React.memo(({ file, setFiles, index, setIsEdit }) => {
+  const [loading, setLoading] = useState(false);
+
   /* validation function to check less than 100 character in title, 
   maximum 5 tags per image */
   const validate = ({ title, tags }) => {
@@ -79,7 +83,21 @@ const UploadCard = React.memo(({ file, setFiles, index }) => {
 
   /* handle remove image */
   const handleRemoveFile = () => {
+    if (setIsEdit) return setIsEdit(false);
     setFiles((files) => files.filter((_, i) => i !== index));
+  };
+
+  /* handle update / edit image */
+  const handleUpdateImage = async () => {
+    if (loading || file?.status === "error") return;
+
+    setLoading(false);
+    const response = await updateImage(file);
+    setLoading(false);
+
+    if (response?.errorMessage) toast.error(response.errorMessage);
+
+    setIsEdit(false);
   };
 
   return (
@@ -164,6 +182,16 @@ const UploadCard = React.memo(({ file, setFiles, index }) => {
       >
         <BsX className="h-6 w-6" />
       </button>
+
+      {setIsEdit ? (
+        <button
+          onClick={handleUpdateImage}
+          className="bg-gray-700 text-white px-4 py-2"
+          disabled={loading || file?.status === "error"}
+        >
+          {loading ? "Loading..." : "Update Image"}
+        </button>
+      ) : null}
     </div>
   );
 });

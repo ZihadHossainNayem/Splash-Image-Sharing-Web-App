@@ -119,3 +119,20 @@ export async function getImagesCount(query) {
     return { errorMessage: error.message };
   }
 }
+
+/* function for update or edit in mongoDB*/
+
+export async function updateImage(image) {
+  try {
+    await ImageModel.findByIdAndUpdate(image?._id, {
+      title: image?.title,
+      tags: image?.tags,
+      public: image?.public,
+    });
+
+    revalidatePath("/");
+    return { message: "Update success.." };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
