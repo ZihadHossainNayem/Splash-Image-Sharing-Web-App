@@ -5,7 +5,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiDownload } from "react-icons/bi";
 import { handleDownloadImage } from "@/utils/downloadImage";
-import { favoriteImage } from "@/actions/imageActions";
+import { deleteImage, favoriteImage } from "@/actions/imageActions";
 import { toast } from "react-toastify";
 import UploadCard from "../UploadCard/UploadCard";
 
@@ -27,7 +27,7 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
     if (response?.errorMessage) toast.error(response.errorMessage);
   }
 
-  /* for edit image */
+  /* for editing image */
   if (isEdit)
     return (
       <UploadCard
@@ -37,6 +37,17 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
         setIsEdit={setIsEdit}
       />
     );
+
+  /* for deleting image */
+  async function handleDeleteImage() {
+    if (confirm("Are you sure you want to delete this image? ")) {
+      setImages((images) => images.filter((_, i) => i !== index));
+
+      const response = await deleteImage(image);
+
+      if (response?.errorMessage) toast.error(response.errorMessage);
+    }
+  }
 
   return (
     <div
@@ -61,7 +72,10 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
         {image?.myUserId === image?.user?._id ? (
           <>
             {/* delete button */}
-            <button className="bg-white bg-opacity-80 p-1 rounded">
+            <button
+              onClick={handleDeleteImage}
+              className="bg-white bg-opacity-80 p-1 rounded"
+            >
               <AiOutlineDelete size={22} />
             </button>
             {/* edit button */}

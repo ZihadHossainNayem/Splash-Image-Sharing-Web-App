@@ -1,7 +1,10 @@
 "use server";
 
 import ImageModel from "@/models/imageModel";
-import { imageUploadToCloudinary } from "@/utils/cloudinary";
+import {
+  deleteFromCloudinary,
+  imageUploadToCloudinary,
+} from "@/utils/cloudinary";
 import { dynamicBlurDataUrl } from "@/utils/dynamicBlurDataUrlGenerator";
 import { generateImagesMatch } from "@/utils/generateImagesMatch";
 import {
@@ -129,6 +132,22 @@ export async function updateImage(image) {
       tags: image?.tags,
       public: image?.public,
     });
+
+    revalidatePath("/");
+    return { message: "Update success.." };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* function for delete in mongoDB*/
+
+export async function deleteImage({ _id, public_id }) {
+  try {
+    await Promise.all([
+      ImageModel.findByIdAndDelete(_id),
+      deleteFromCloudinary(public_id),
+    ]);
 
     revalidatePath("/");
     return { message: "Update success.." };
