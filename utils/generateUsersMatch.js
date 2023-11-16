@@ -20,4 +20,7 @@ export function generateUsersMatch(query) {
 
   if (page === "follower")
     return { followings: new Types.ObjectId(id), ...paginate_updatedAt };
+
+  /* search users */
+  if (page === "users") return paginate_id;
 }

@@ -63,11 +63,18 @@ export async function getImages(query) {
   try {
     /* extract sort and limit parameter from query */
     const sort = query?.sort || "_id";
-    const limit = query?.limit * 1 || 15;
+    const limit = query?.limit * 1 || 25;
+
+    const search = query?.search;
 
     const match = generateImagesMatch(query);
 
-    const pipeline = await generateImagesPipeline({ match, limit, sort });
+    const pipeline = await generateImagesPipeline({
+      match,
+      limit,
+      sort,
+      search,
+    });
 
     const images = JSON.parse(
       JSON.stringify(await ImageModel.aggregate(pipeline))
@@ -108,9 +115,10 @@ export async function favoriteImage({ myUserId, _id, isFavorite }) {
 
 export async function getImagesCount(query) {
   try {
+    const search = query?.search;
     const match = generateImagesMatch(query);
 
-    const pipeline = await generateImagesCountPipeline({ match });
+    const pipeline = await generateImagesCountPipeline({ match, search });
     console.log(pipeline);
     const [result] = JSON.parse(
       JSON.stringify(await ImageModel.aggregate(pipeline))

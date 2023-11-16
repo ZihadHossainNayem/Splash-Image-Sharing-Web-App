@@ -3,7 +3,7 @@
 import getServerUser from "./getServerUser";
 import { Types } from "mongoose";
 
-export async function generateImagesPipeline({ match, sort, limit }) {
+export async function generateImagesPipeline({ match, sort, limit, search }) {
   const user = await getServerUser();
   const userId = user ? new Types.ObjectId(user?._id) : undefined;
 
@@ -47,18 +47,54 @@ export async function generateImagesPipeline({ match, sort, limit }) {
     },
   ];
 
+  /* for image search */
+  const search_pipeline = [
+    {
+      $search: {
+        index: "imageSearch",
+        text: {
+          query: search,
+          path: ["title", "tags"],
+          fuzzy: {
+            prefixLength: 3,
+          },
+        },
+      },
+    },
+  ];
+
+  if (search) return [...search_pipeline, ...base_pipeline];
+
   return base_pipeline;
 }
 
 /* for public, private, favorite image count for profile menu*/
 
-export async function generateImagesCountPipeline({ match }) {
+export async function generateImagesCountPipeline({ match, search }) {
   const base_pipeline = [
     { $match: match } /* finding match */,
     {
       $count: "total",
     },
   ];
+
+  /* for image search */
+  const search_pipeline = [
+    {
+      $search: {
+        index: "imageSearch",
+        text: {
+          query: search,
+          path: ["title", "tags"],
+          fuzzy: {
+            prefixLength: 3,
+          },
+        },
+      },
+    },
+  ];
+
+  if (search) return [...search_pipeline, ...base_pipeline];
 
   return base_pipeline;
 }

@@ -29,6 +29,7 @@ export function generateImagesMatch(query) {
       ...paginate_updatedAt,
     };
 
-  /* If the page is "home", construct and return the match query object */
-  if (page === "home") return { public: true, ...paginate_id };
+  /* If the page is "home" or "search images", construct and return the match query object */
+  if (page === "home" || page === "images")
+    return { public: true, ...paginate_id };
 }

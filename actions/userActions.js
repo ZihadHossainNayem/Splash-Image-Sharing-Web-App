@@ -6,7 +6,10 @@ import {
   imageUploadToCloudinary,
 } from "@/utils/cloudinary";
 import { generateUsersMatch } from "@/utils/generateUsersMatch";
-import { generateUsersPipeline } from "@/utils/generateUsersPipeline";
+import {
+  generateUsersCountPipeline,
+  generateUsersPipeline,
+} from "@/utils/generateUsersPipeline";
 import { nextCursor } from "@/utils/nextCursor";
 import { revalidatePath } from "next/cache";
 
@@ -109,11 +112,18 @@ export async function getUsers(query) {
   try {
     /* extract sort and limit parameter from query */
     const sort = query?.sort || "_id";
-    const limit = query?.limit * 1 || 15;
+    const limit = query?.limit * 1 || 5;
+
+    const search = query?.search;
 
     const match = generateUsersMatch(query);
 
-    const pipeline = await generateUsersPipeline({ match, limit, sort });
+    const pipeline = await generateUsersPipeline({
+      match,
+      limit,
+      sort,
+      search,
+    });
 
     const users = JSON.parse(
       JSON.stringify(await UserModel.aggregate(pipeline))
@@ -123,6 +133,26 @@ export async function getUsers(query) {
     const next_cursor = nextCursor({ data: users, sort, limit });
 
     return { data: users, next_cursor };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}
+
+/* function for users count */
+
+export async function getUsersCount(query) {
+  try {
+    const search = query?.search;
+    const match = generateUsersMatch(query);
+
+    const pipeline = await generateUsersCountPipeline({ match, search });
+    console.log(pipeline);
+    const [result] = JSON.parse(
+      JSON.stringify(await UserModel.aggregate(pipeline))
+    );
+    console.log(result);
+
+    return result?.total || 0;
   } catch (error) {
     return { errorMessage: error.message };
   }
