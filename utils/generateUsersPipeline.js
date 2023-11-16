@@ -39,7 +39,7 @@ export async function generateUsersPipeline({ match, sort, limit, search }) {
   const search_pipeline = [
     {
       $search: {
-        index: "userSearch",
+        index: "usersSearch",
         text: {
           query: search,
           path: "name",

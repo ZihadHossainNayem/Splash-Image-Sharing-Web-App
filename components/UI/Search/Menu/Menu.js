@@ -9,7 +9,7 @@ import { BsImages } from "react-icons/bs";
 const SearchMenu = async ({ page, search, id }) => {
   const [images_count, users_count, private_count] = await Promise.all([
     getImagesCount({ page: "images", search }),
-    getUsersCount({ page: "images", search }),
+    getUsersCount({ page: "users", search }),
     id ? getImagesCount({ page: "private", search, id }) : 0,
   ]);
 
