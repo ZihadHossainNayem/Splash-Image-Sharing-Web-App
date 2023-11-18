@@ -29,6 +29,15 @@ li.active {
     alternate-reverse;
 }
 
+.modal_active {
+  width: 90vw;
+  background: white;
+  padding: 0 16px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: 220;

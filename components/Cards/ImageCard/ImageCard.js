@@ -8,8 +8,9 @@ import { handleDownloadImage } from "@/utils/downloadImage";
 import { deleteImage, favoriteImage } from "@/actions/imageActions";
 import { toast } from "react-toastify";
 import UploadCard from "../UploadCard/UploadCard";
+import { signIn } from "next-auth/react";
 
-const ImageCard = React.memo(({ image, setImages, index }) => {
+const ImageCard = React.memo(({ image, setImages, index, setImageIndex }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   /* favorite image button handle */
@@ -66,7 +67,7 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
       />
       {/* top section */}
       <div
-        className="absolute left-0 top-0 w-full px-4 py-2 flex items-center gap-2 justify-end
+        className="absolute left-0 top-0 z-[2] w-full px-4 py-2 flex items-center gap-2 justify-end
        transition-transform transform -translate-y-full group-hover:translate-y-0"
       >
         {image?.myUserId === image?.user?._id ? (
@@ -101,7 +102,7 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
       </div>
       {/* bottom section */}
       <div
-        className="absolute left-0 bottom-0 w-full px-4 py-2 flex items-center gap-2 justify-between 
+        className="absolute left-0 bottom-0 z-[2] w-full px-4 py-2 flex items-center gap-2 justify-between 
       transition-transform transform translate-y-full group-hover:translate-y-0"
       >
         {/* user details */}
@@ -132,6 +133,10 @@ const ImageCard = React.memo(({ image, setImages, index }) => {
           <BiDownload size={22} />
         </button>
       </div>
+      <button
+        className="w-full h-full absolute top-0 left-0 z-[1]"
+        onClick={() => setImageIndex(index)}
+      />
     </div>
   );
 });

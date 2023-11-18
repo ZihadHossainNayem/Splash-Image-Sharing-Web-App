@@ -163,3 +163,30 @@ export async function deleteImage({ _id, public_id }) {
     return { errorMessage: error.message };
   }
 }
+
+/* function for getting image by id*/
+
+export async function getImageById(id) {
+  try {
+    const [myUser, image] = await Promise.all([
+      getServerUser(),
+      ImageModel.findById(id).populate("user", "name avatar"),
+    ]);
+    console.log({ myUser, image });
+
+    if (!image) throw new Error("Image does not exist!");
+
+    const newImage = {
+      ...image._doc,
+      isFavorite: image.favorite_users.includes(myUser?._id),
+      total_favorite: image.favorite_users.length,
+      favorite_users: [],
+      myUserId: myUser?._id,
+    };
+    console.log(newImage);
+
+    return { data: JSON.parse(JSON.stringify(newImage)) };
+  } catch (error) {
+    return { errorMessage: error.message };
+  }
+}

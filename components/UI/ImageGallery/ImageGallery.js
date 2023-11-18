@@ -2,11 +2,14 @@
 import ImageCard from "@/components/Cards/ImageCard/ImageCard";
 import useInView from "@/hooks/useInView";
 import React, { useEffect, useState } from "react";
+import Modal from "../Modal/Modal";
+import ImageDetails from "../Image/Image";
 
 const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
   const [files, setFiles] = useState(data);
   const [next, setNext] = useState(next_cursor);
   const [loading, setLoading] = useState(false);
+  const [imageIndex, setImageIndex] = useState(false);
 
   const { ref, inView } = useInView();
 
@@ -38,6 +41,7 @@ const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
             image={file}
             setImages={setFiles}
             index={index}
+            setImageIndex={setImageIndex}
           />
         ))}
       </div>
@@ -54,6 +58,18 @@ const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
       >
         {loading ? "Loading..." : "Load More"}
       </button>
+
+      {imageIndex !== false ? (
+        <Modal open={setImageIndex}>
+          <div>
+            <ImageDetails
+              image={files[imageIndex]}
+              setImages={setFiles}
+              type="modal_active"
+            />
+          </div>
+        </Modal>
+      ) : null}
     </div>
   );
 };

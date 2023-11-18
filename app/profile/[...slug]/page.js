@@ -12,7 +12,6 @@ const ProfilePage = async ({ params: { slug } }) => {
 
   /* fetching user data from server */
   const myUser = await getServerUser();
-  console.log(page);
   return (
     <>
       <ProfileInfo myUser={myUser} id={id} />
