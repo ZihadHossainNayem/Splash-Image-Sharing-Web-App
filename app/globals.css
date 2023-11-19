@@ -33,7 +33,6 @@ li.active {
   width: 90vw;
   background: white;
   padding: 0 16px;
-  border-radius: 4px;
   display: flex;
   flex-direction: column;
 }

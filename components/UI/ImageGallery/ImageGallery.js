@@ -4,6 +4,7 @@ import useInView from "@/hooks/useInView";
 import React, { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import ImageDetails from "../Image/Image";
+import Slider from "../Slider/Slider";
 
 const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
   const [files, setFiles] = useState(data);
@@ -23,6 +24,8 @@ const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
 
     setFiles(newData);
     setNext(response?.next_cursor);
+
+    return newData;
   }
 
   /* for auto load more images */
@@ -61,13 +64,19 @@ const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
 
       {imageIndex !== false ? (
         <Modal open={setImageIndex}>
-          <div>
-            <ImageDetails
-              image={files[imageIndex]}
-              setImages={setFiles}
-              type="modal_active"
-            />
-          </div>
+          <ImageDetails
+            image={files[imageIndex]}
+            setImages={setFiles}
+            type="modal_active"
+          />
+
+          <Slider
+            setImageIndex={setImageIndex}
+            currentIndex={imageIndex}
+            latestIndex={files.length - 1}
+            next={next}
+            handleLoadMore={handleLoadMore}
+          />
         </Modal>
       ) : null}
     </div>
