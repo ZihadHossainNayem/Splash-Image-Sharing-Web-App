@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const Slider = ({
@@ -32,11 +32,11 @@ const Slider = ({
   }
 
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       {/* left button */}
       <button
         onClick={handlePreviousImage}
-        className={`absolute top-[50%] left-4 z-[100] p-3 bg-black bg-opacity-30 hover:bg-opacity-70 text-white ${
+        className={`absolute top-[50%] left-5 z-[100] p-3 bg-black bg-opacity-30 hover:bg-opacity-70 text-white ${
           currentIndex <= 0 ? "hidden" : "block"
         }`}
       >
@@ -47,7 +47,7 @@ const Slider = ({
       <button
         onClick={handleNextImage}
         disabled={loading}
-        className={`absolute top-[50%] right-4 z-[100] p-3 bg-black bg-opacity-30 hover:bg-opacity-70 text-white ${
+        className={`absolute top-[50%] right-5 z-[100] p-3 bg-black bg-opacity-30 hover:bg-opacity-70 text-white ${
           currentIndex >= latestIndex && next === "stop" ? "hidden" : "block"
         }`}
       >

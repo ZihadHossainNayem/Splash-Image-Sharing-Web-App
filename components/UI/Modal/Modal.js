@@ -34,7 +34,7 @@ const Modal = ({ children, open, url }) => {
           <AiOutlineClose />
         </button>
         {/* content */}
-        <div className="max-w-[95vw] max-h-[95vh] overflow-y-auto">
+        <div className="max-w-[95vw] max-h-[95vh] overflow-y-auto custom-scrollbar">
           {children}
         </div>
       </div>

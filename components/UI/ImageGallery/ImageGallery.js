@@ -36,7 +36,7 @@ const ImageGallery = ({ data, next_cursor, fetchingData, query }) => {
   }, [inView]);
 
   return (
-    <div className="w-[95%] max-w-[1600px] m-auto">
+    <div className="w-[95%] max-w-[1600px] m-auto image_gallery">
       <div className="m-8 mx-auto" style={{ columns: "5 280px", gap: "16px" }}>
         {files.map((file, index) => (
           <ImageCard

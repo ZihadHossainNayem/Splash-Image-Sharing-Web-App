@@ -69,6 +69,7 @@ const ImageDetails = ({ image, setImages, type }) => {
           <span className="font-medium text-lg">{image?.user?.name}</span>
         </Link>
 
+        {/* buttons */}
         <div className="flex items-center gap-2">
           {/* share link */}
           {type ? (
@@ -102,12 +103,12 @@ const ImageDetails = ({ image, setImages, type }) => {
       </div>
 
       {/* middle section - image section */}
-      <div className="overflow-hidden ">
+      <div className="flex flex-1 justify-center overflow-hidden">
         <Image
           src={image?.imgUrl}
           alt={image?.title}
-          width={1280}
-          height={1280}
+          width={1620}
+          height={1620}
           size="70vw"
           placeholder="blur"
           blurDataURL={image?.blurHash}
@@ -116,7 +117,7 @@ const ImageDetails = ({ image, setImages, type }) => {
       </div>
 
       {/* bottom section */}
-      <div className="py-4 flex flex-col gap-2 overflow-hidden">
+      <div className="py-4 flex flex-col gap-2">
         {/* title */}
         <h1 className="font-medium text-lg mb-2 capitalize">{image?.title}</h1>
         {/* favorite counter */}

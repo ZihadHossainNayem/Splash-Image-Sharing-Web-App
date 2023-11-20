@@ -30,15 +30,31 @@ li.active {
 }
 
 .modal_active {
-  width: 90vw;
   background: white;
-  padding: 0 16px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+}
+@media (max-width: 868px) {
+  .modal_active {
+    width: 90vw; /* For small screens */
+  }
+}
+@media (min-width: 869px) {
+  .modal_active {
+    width: 60vw; /* For larger screens */
+  }
 }
 
 @keyframes dash {
   to {
     stroke-dashoffset: 220;
   }
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
