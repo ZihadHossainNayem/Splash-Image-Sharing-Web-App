@@ -63,15 +63,15 @@ const Upload = () => {
         ))}
       </div>
 
-      {/* upload images, max 5 at once*/}
+      {/* upload images, max 10 at once*/}
       <button
         onClick={handleFilesUpload}
         className={`block py-3 px-6 my-4 cursor-pointer text-white rounded font-semibold ${
-          count <= 0 || count > 5 || loading
+          count <= 0 || count > 10 || loading
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-black "
         }`}
-        disabled={count <= 0 || count > 5 || loading}
+        disabled={count <= 0 || count > 10 || loading}
       >
         {loading
           ? "Loading..."

@@ -21,10 +21,10 @@ export const validFiles = (file) => {
     };
   }
 
-  if (file.size > 1024 * 1024) {
+  if (file.size > 2 * 1024 * 1024) {
     return {
       status: "error",
-      errorMessage: `Image size is larger than 1MB`,
+      errorMessage: `Image size is larger than 2MB`,
       title: file.name,
       imgUrl: URL.createObjectURL(file),
     };

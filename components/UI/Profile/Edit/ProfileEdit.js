@@ -58,7 +58,7 @@ const ProfileEdit = ({ user, setIsEdit }) => {
         {/* avatar */}
         <label
           htmlFor="upload"
-          className="w-36 h-36 rounded-full overflow-hidden cursor-default flex items-center justify-center"
+          className="w-36 h-36 rounded-full overflow-hidden cursor-pointer flex items-center justify-center"
         >
           <Image
             src={file?.imgUrl || user?.avatar}

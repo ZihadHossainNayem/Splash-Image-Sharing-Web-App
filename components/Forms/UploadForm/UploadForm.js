@@ -51,12 +51,12 @@ const UploadForm = React.memo(({ setFiles }) => {
         />
         <p className="mx-3 md:text-lg font-medium">
           <span className="font-semibold text-blue-500">Drag &amp; drop</span>{" "}
-          up to 5 images or{" "}
+          up to 10 images or{" "}
           <span className="font-semibold text-blue-500">browse</span> to choose
           files
         </p>
         <p className="text-sm text-gray-500">
-          jpeg, &amp; png files only - Max 1MB
+          jpeg, &amp; png files only - Max 2MB
         </p>
       </label>
     </form>
