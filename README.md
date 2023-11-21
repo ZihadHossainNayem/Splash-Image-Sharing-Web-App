@@ -2,10 +2,16 @@
 
 Splash-Image-Sharing-Web-App
 
+
+
 ## Overview
 The project is a web application allowing users to manage images, galleries, and user profiles. It facilitates image uploads, private and public image galleries, user authentication, and search functionalities. Built using Next.js, React, MongoDB for data storage, and Cloudinary for image hosting.
 
+
+
+
 ## Features
+
 ### Authentication
 - User signup, login, and protected route access using NextAuth.js.
 - Utilization of authentication tokens for managing user sessions.
@@ -23,7 +29,11 @@ The project is a web application allowing users to manage images, galleries, and
 ### Search Functionality
 - **Image Search:** Users can search images by titles and tags using efficient indexing.
 
+
+
+
 ## Components and Functionality
+
 ### Next.js Pages
 - **Upload Page:** Allows users to upload images to the application.
 - **Image Gallery Pages:** Displays public/private galleries.
@@ -47,7 +57,11 @@ The project is a web application allowing users to manage images, galleries, and
 - **MongoDB:** User and image data storage.
 - **NextAuth.js:** Manages user authentication and sessions.
 
+
+
+
 ## Workflow
+
 ### User Interaction Flow
 - **User Authentication:** sers can sign up or log in to access the application's functionalities.
 - **Image Management:** Upload, organize, and view images within private and public galleries.
@@ -59,6 +73,9 @@ The project is a web application allowing users to manage images, galleries, and
 - **Image Upload Flow:** Users can upload images, which are processed using Cloudinary and stored in user-specific folders.
 - **Gallery Management Flow:** Galleries are managed based on user permissions, with private galleries accessible only to the owner.
 - **Search Flow:** Search functionalities leverage indexed data for efficient retrieval of images based on user queries.
+
+
+
 
 ### Technologies Used
 
