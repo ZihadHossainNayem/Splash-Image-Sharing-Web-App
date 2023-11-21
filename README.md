@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Name
 
-## Getting Started
+Splash-Image-Sharing-Web-App
 
-First, run the development server:
+## Overview
+The project is a web application allowing users to manage images, galleries, and user profiles. It facilitates image uploads, private and public image galleries, user authentication, and search functionalities. Built using Next.js, React, MongoDB for data storage, and Cloudinary for image hosting.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+### Authentication
+- User signup, login, and protected route access using NextAuth.js.
+- Utilization of authentication tokens for managing user sessions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Image Management
+- **Upload Images:** Users can upload images (JPEG, PNG) processed using Cloudinary and stored in specific user folders.
+- **Image Galleries:** Public and private galleries allow users to organize uploaded images. Private galleries are accessible only to the owner.
+- **Favorite Images:** Users can mark images as favorites and access a dedicated gallery for favorited images.
+- **Update/Delete Images:** Users can udate & delete their own image.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### User Management
+- **User Profiles:** Each user has a profile displaying their images, public information, user-specific galleries, and favorited images.
+- **Following/Follower System:** Users can follow others, showcasing follower/following lists on profiles.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Search Functionality
+- **Image Search:** Users can search images by titles and tags using efficient indexing.
 
-## Learn More
+## Components and Functionality
+### Next.js Pages
+- **Upload Page:** Allows users to upload images to the application.
+- **Image Gallery Pages:** Displays public/private galleries.
+- **User Profile Pages:** Showcase user-specific details, including uploaded images and follower/following lists.
+- **Search Pages:** Implements image and user search.
 
-To learn more about Next.js, take a look at the following resources:
+### Middleware
+- **Authentication Middleware:** Restricts access to private routes, ensuring only authenticated users can access certain functionalities
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Utility Functions
+- **Image Uploading:** Cloudinary-powered image upload and storage.
+- **Image Downloading:** Functionality to download images.
+- **Pagination & Cursor Handling:** Efficient handling for image/user retrieval.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Database Models
+- **Image Model:** Defines image-related schema, including user references and favorites.
+- **User Model:** Defines user-related schema, including followers and followings.
 
-## Deploy on Vercel
+### External Services
+- **Cloudinary:** Image storage and management.
+- **MongoDB:** User and image data storage.
+- **NextAuth.js:** Manages user authentication and sessions.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Workflow
+### User Interaction Flow
+- **User Authentication:** sers can sign up or log in to access the application's functionalities.
+- **Image Management:** Upload, organize, and view images within private and public galleries.
+- **User Profiles:** Access user-specific information, follower/following lists, and favorited images.
+- **Search:** Search for images based on titles and tags.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Application Flow
+- **Authentication Flow:** NextAuth.js handles user authentication, granting access to protected routes.
+- **Image Upload Flow:** Users can upload images, which are processed using Cloudinary and stored in user-specific folders.
+- **Gallery Management Flow:** Galleries are managed based on user permissions, with private galleries accessible only to the owner.
+- **Search Flow:** Search functionalities leverage indexed data for efficient retrieval of images based on user queries.
+
+### Technologies Used
+
+- **Next.js**: Framework for building React applications, providing server-side rendering and routing capabilities.
+- **React**: JavaScript library for building user interfaces.
+- **MongoDB**: NoSQL database used for storing application data like user profiles, images, and galleries.
+- **Cloudinary**: Cloud-based image management platform used for storing and hosting images.
+- **NextAuth.js**: Library for authentication in Next.js applications, handling user authentication, and managing sessions.
+- **Mongoose**: MongoDB object modeling tool for Node.js, used for interacting with MongoDB databases using JavaScript objects.
+- **Intersection Observer API**: JavaScript API utilized for tracking elements entering or exiting the viewport.
+- **Node.js**: JavaScript runtime environment for executing server-side code.
+- **Express.js**: Web application framework for Node.js used for handling server-side logic.
+- **JWT (JSON Web Tokens)**: Tokens used for authentication and authorization purposes.
+- **Search Indexing Services**: Implementation of search functionality with indexes for efficient retrieval of images based on titles and tags.
+
