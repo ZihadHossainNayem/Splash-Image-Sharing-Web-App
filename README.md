@@ -2,7 +2,11 @@
 
 Splash-Image-Sharing-Web-App
 
+## Screenshots
 
+![localhost_3000_ (4)](https://github.com/ZihadHossainNayem/Splash-Image-Sharing-Web-App/assets/30808845/a49afb38-4566-4461-b09b-ee930dfae200)
+
+![localhost_3000_ (5)](https://github.com/ZihadHossainNayem/Splash-Image-Sharing-Web-App/assets/30808845/5d9c4af3-4713-43b5-8913-fce350a0b940)
 
 ## Overview
 The project is a web application allowing users to manage images, galleries, and user profiles. It facilitates image uploads, private and public image galleries, user authentication, and search functionalities. Built using Next.js, React, MongoDB for data storage, and Cloudinary for image hosting.
@@ -24,6 +28,7 @@ The project is a web application allowing users to manage images, galleries, and
 
 ### User Management
 - **User Profiles:** Each user has a profile displaying their images, public information, user-specific galleries, and favorited images.
+- - **User Information Update:** Users can update their profile information, including name, avatar, and other relevant details.
 - **Following/Follower System:** Users can follow others, showcasing follower/following lists on profiles.
 
 ### Search Functionality
